@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nutui/nutui@2.3.7/dist/nutui.min.css">
+</head>
+<body>
+    <div id="app">
+		    <nut-noticebar
+		      text="页面改为Vue框架，并添加除山东省外其他地区的支持。"
+		    ></nut-noticebar>
+			<nut-cell 
+			  :show-icon="true" 
+			  title="请选择城市" 
+			  :desc="option" 
+			  @click.native="openSwitch('isVisible')">
+			</nut-cell>
+			<nut-picker
+			  :is-visible="isVisible"
+			  :list-data="listData"
+			  :default-value-data="defaultValueData"
+			  @close="closeSwitch('isVisible')"
+			  @confirm="confirm"
+			></nut-picker>
+			
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <!-- 引入NutUI组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/@nutui/nutui@2.3.7/dist/nutui.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                  option: '请选择',
+                  isVisible: false,
+                  listData: [
+                    [
+                      {
+                        label: 1,
+                        value: '南京市',
+                      },
+                      {
+                        label: 2,
+                        value: '无锡市',
+                      },
+                      {
+                        label: 3,
+                        value: '海北藏族自治区',
+                      },
+                      {
+                        label: 4,
+                        value: '北京市',
+                      },
+                      {
+                        label: 5,
+                        value: '连云港市',
+                      },
+                      {
+                        label: 6,
+                        value: '浙江市',
+                      },
+                      {
+                        label: 7,
+                        value: '江苏市',
+                      },
+                      {
+                        label: 8,
+                        value: '大庆市',
+                      },
+                      {
+                        label: 9,
+                        value: '绥化市',
+                      },
+                      {
+                        label: 10,
+                        value: '潍坊市',
+                      },
+                      {
+                        label: 11,
+                        value: '请按市',
+                      },
+                      {
+                        label: 12,
+                        value: '乌鲁木齐市',
+                      },
+                    ],
+                  ],
+                  defaultValueData: null
+                }
+              },
+              mounted() {
+                this.defaultValueData = [this.listData[0][3]];
+              },
+              methods: {
+                openSwitch(param) {
+                  this[`${param}`] = true;
+                },
+            
+                closeSwitch(param) {
+                  this[`${param}`] = false;
+                },
+            
+                confirm(chooseData) {
+                  this.option = `${chooseData[0].value}`;
+                }
+              }  
+        });
+    </script>
+</body>
+</html>
